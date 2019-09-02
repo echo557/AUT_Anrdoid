@@ -1,23 +1,42 @@
 *** Settings ***
 Suite Setup       connectToDevice
 Resource          ../TestResource/gwmv2.robot
+Variables         ../TestResource/general_res.py
 
 *** Test Cases ***
 General_001_Wisdom_Parking
     [Setup]    startHomeApp
     log        " Check WIFI is on and connected"
     statusOfWifiConnection
-#    shortTouch    ${Btn_App_Lists}
 
     log        "Step1 Enter App Lists Page"
     enterAppListFromHome  ${Btn_App_Lists}
     swipeLeft
-    log  "Step2 Enter WEY Store App Page"
 
+    log  "Step2 Enter Wisdom Store App Page"
+    shortTouch    ${Btn_Wisdom_Parking}
 
-     \ Variable Should Exist
-
-General_001_WEY_Store
+General_002_WEY_Store
     [Setup]    startHomeApp
-     log        " Check WIFI is on and connected"
-    shortTouch    ${Btn_App_Lists}
+    log        " Check WIFI is on and connected"
+    statusOfWifiConnection
+
+    log        "Step1 Enter App Lists Page"
+    enterAppListFromHome  ${Btn_App_Lists}
+    swipeLeft
+
+    log  "Step2 Enter WEY Store App Page"
+    shortTouch    ${Btn_WEY_Store}
+
+General_003_Service_Life
+    [Setup]    startHomeApp
+    log        " Check WIFI is on and connected"
+    statusOfWifiConnection
+
+    log        "Step1 Enter App Lists Page"
+    enterAppListFromHome  ${Btn_App_Lists}
+    swipeLeft
+
+    log  "Step2 Enter WEY Store App Page"
+    shortTouch    ${Btn_Service_Life}
+
