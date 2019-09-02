@@ -74,14 +74,22 @@ class gwmv2:
             logging.error("Elemnt cannot be found." )
 
     def statusOfWifiConnection(self):
-        try:
-            output, exit_code = self.connDev.shell(["dumpsys","wifi", "| more"])
-            str1 = "Wi-Fi is enabled"
-            str2 = "mEnableTrafficStatsPoll true"
-            if u"华为p20" and str1 and str2 in output:
-                logging.info("WIFI is connectd,status is %s" %str1)
-        except:
-            logging.error("WIFI is not connected,please connect WIFI first")
+        # try:
+        #     output, exit_code = self.connDev.shell(["dumpsys","wifi", "| more"])
+        #     str1 = "Wi-Fi is enabled"
+        #     str2 = "mEnableTrafficStatsPoll true"
+        #     if u"华为p20" and str1 and str2 in output:
+        #         logging.info("WIFI is connectd,status is %s" %str1)
+        # except:
+        #     logging.error("WIFI is not connected,please connect WIFI first")
+
+        output, exit_code = self.connDev.shell(["dumpsys", "wifi|more"])
+        str1 = "Wi-Fi is enabled"
+        str2 = "mEnableTrafficStatsPoll true"
+        if u"华为p20" and str1 and str2 in output:
+            logging.info("WIFI is connectd,%s" %str1)
+        else:
+            raise ValueError("WIFI is not connected,please connect WIFI first")
     #
     # def enterAppFromAppList(self,app_name,btn):
     #     # self.connDev.xpath(Btn_App_Lists).click()
