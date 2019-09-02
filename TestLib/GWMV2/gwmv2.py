@@ -3,7 +3,7 @@ import os
 import sys
 import logging
 import time
-# from assertpy import assert_that
+from assertpy import assert_that
 
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(os.path.split(curPath)[0])[0]
@@ -24,12 +24,11 @@ class gwmv2:
         logging.info(self.connDev)
 
     def shortTouch(self, btn):
-        # logging.info(self.connDev)
         try:
             self.connDev.xpath(btn).click()
         except:
-            assert (self.connDev.xpath(btn).click())
             logging.error(self.connDev.xpath(btn).click())
+            assert (self.connDev.xpath(btn).click())
 
             # assert (self.connDev.xpath(btn).click())
             # assert_that(self.connDev.xpath(btn).click()).is_true()
@@ -41,8 +40,9 @@ class gwmv2:
         try:
             self.connDev.session(Home_Pkg)
         except:
-            assert(self.connDev.session(Home_Pkg))
             logging.error("Home App start failed")
+            assert(self.connDev.session(Home_Pkg))
+
 
     def getDev(self):
         return self.connDev
@@ -61,8 +61,8 @@ class gwmv2:
             self.connDev.xpath(elem).exists
             logging.info("Element exist %s" %elem)
         except:
-
             logging.error("Elemnt cannot be found.")
+            assert (self.connDev.xpath(elem))
 
     def compareImg(self,captured_img,verified_img):
         self.connDev.screenshot(captured_img)
@@ -71,18 +71,21 @@ class gwmv2:
         try:
             self.connDev.xpath(elem).click()
         except:
-            logging.error("Elemnt cannot be found." )
+            logging.error("Elemnt cannot be found.")
+            assert (self.connDev.xpath(elem))
 
     def statusOfWifiConnection(self):
         # try:
-        #     output, exit_code = self.connDev.shell(["dumpsys","wifi", "| more"])
-        #     str1 = "Wi-Fi is enabled"
-        #     str2 = "mEnableTrafficStatsPoll true"
-        #     if u"华为p20" and str1 and str2 in output:
-        #         logging.info("WIFI is connectd,status is %s" %str1)
+        #     output, exit_code = self.connDev.shell(["dumpsys","wifi|more"])
+        #     status = "Wi-Fi is enabled"
+        #     traffic_stats = "mEnableTrafficStatsPoll true"
+        #     host_name = WIFI_Host
+        #     if (host_name and traffic_stats and status) in output:
+        #         # assert_that(output).contains_only(host_name,status,traffic_stats)
+        #         logging.info("WIFI is connectd,%s" %status)
         # except:
         #     logging.error("WIFI is not connected,please connect WIFI first")
-
+        #     raise ValueError("WIFI is not connected,please connect WIFI first")
         output, exit_code = self.connDev.shell(["dumpsys", "wifi|more"])
         str1 = "Wi-Fi is enabled"
         str2 = "mEnableTrafficStatsPoll true"
