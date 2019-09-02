@@ -1,0 +1,10 @@
+*** Settings ***
+Suite Setup       ConnectToDeviceByUSB
+Suite Teardown
+Test Setup        SetUpCases
+Test Teardown     TearDownCases
+
+*** Test Cases ***
+BTTestSuite
+    [Setup]
+    log    **start**
