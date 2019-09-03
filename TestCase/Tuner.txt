@@ -1,7 +1,0 @@
-*** Settings ***
-Library           TunerTestSuite.py
-
-*** Test Cases ***
-TunerTestSuite
-    log    **start**
-    TestEnterTuner
